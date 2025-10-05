@@ -5,11 +5,10 @@
     <main>
         <div class="container mx-auto px-4 py-8">
             <div class="text-center mb-12">
-                <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Welcome to homes Airbnb</h1>
-                <p class="mt-4 text-xl text-gray-600">Discover amazing places to stay, from cozy homes to luxurious villas.</p>
-            </div>
+                <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Welcome to Favorites</h1>
+                </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <% registeredHomes.forEach(home => { %>
+                <% homes.forEach(home => { %>
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
                         <img src="<%= home.photoUrl %>" alt="<%= home.houseName %>" class="w-full h-56 object-cover">
                         <div class="p-5">
@@ -19,7 +18,6 @@
                                 <p class="text-gray-900 font-extrabold text-xl">₹<%= home.price %> <span class="text-base font-normal text-gray-500">/ night</span></p>
                                 <p class="text-yellow-500 font-semibold text-lg">⭐ <%= home.rating %></p>
                             </div>
-                            <%- include('../partials/addToFav', {home: home}) %>
                             <a href="/homes/<%= home.id %>" class="block text-center mt-4 w-full bg-rose-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-rose-600 transition duration-300 ease-in-out">Details</a>
                             
                         </div>
