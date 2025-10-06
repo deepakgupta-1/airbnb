@@ -1,3 +1,4 @@
+const e = require('express');
 const Home = require('../models/Home');
 
 exports.getAddHome= (req, res, next)=>{
@@ -57,6 +58,22 @@ exports.postEditHome = (req, res, next)=>{
         }
         
     });
+}
+
+exports.postDeleteHome = (req, res, next)=>{
+    const homeId = req.params.homeId;
+    console.log("came to delete",homeId);
+    Home.deleteById(homeId, (err)=>{
+        if(err){
+            console.log('error while deleting home',err);
+        }else{
+            res.redirect('/host/host-homes');
+        }
+    }
+)
+
+   
+    
 }
 
 
