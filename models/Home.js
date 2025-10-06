@@ -5,7 +5,7 @@ const homeFilePath = path.join(rootDir, 'data', 'registeredHomes.json');
 
 module.exports = class Home{
     constructor(houseName, price, location, rating, photoUrl){
-        this.id = Math.random().toString();
+        
         this.houseName = houseName;
         this.price = price;
         this.location = location;
@@ -14,7 +14,20 @@ module.exports = class Home{
     }
     save(callback){
         Home.fetchAll((registeredHomes)=>{
-        registeredHomes.push(this);
+            if(this.id){
+                registeredHomes = registeredHomes.map((home)=>{
+                    if(home.id === this.id){
+                        return this;
+                    }else{
+                        return home;
+                    }
+                })
+
+            }else{
+                this.id = Math.random().toString();
+                registeredHomes.push(this);
+            }
+        
         fs.writeFile(homeFilePath, JSON.stringify(registeredHomes), (err) => {
             if(err){
                 alert('something went wrong, add again');
@@ -37,7 +50,6 @@ module.exports = class Home{
 )}
     static findById(homeId, callback){
         Home.fetchAll((homes)=>{
-            // console.log(homes);
             const home = homes.find(home=> home.id === homeId);
             callback(home);
         })
