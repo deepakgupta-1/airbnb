@@ -21,6 +21,14 @@ module.exports = class Favorite{
             fs.writeFile(favoriteFilePath, JSON.stringify(favoriteIds), callback)
             })
         }
+
+    static removeById(homeId, callback){
+        Favorite.fetchAll((homeIds)=>{
+            const newHomes  =  homeIds.filter((home)=> home !== homeId);
+            fs.writeFile(favoriteFilePath, JSON.stringify(newHomes), callback);
+        })
+    }
+
 }
 
 
